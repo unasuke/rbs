@@ -1,0 +1,43 @@
+module RBS
+  module Collection
+    class Config
+      # Lockfile represents `rbs_collection.lock.yaml`
+      # 
+      class Lockfile
+        type lockfile_source_git_source = {
+          'name' => String,
+          'remote' => String,
+          'revision' => String,
+          'repo_dir' => String?
+        }
+        type lockfile_source_gem = { 'name' => String, 'version' => String, 'source' => Sources::source_entry }
+
+        type lockfile_source = {
+          'sources' => Array[lockfile_source_git_source],
+          'path' => String,
+          'gems' => Array[lockfile_source_gem]
+        }
+
+        type gem = { name: String, version: String, source: Sources::t }
+
+        attr_reader file_path: Pathname
+
+        attr_reader path: Pathname
+
+        attr_reader sources: Array[Sources::Git]
+
+        attr_reader gems: Hash[String, gem]
+
+        def initialize: (file_path: Pathname, path: Pathname) -> void
+
+        def all_sources: () -> Array[Sources::t]
+
+        def dump: () -> lockfile_source
+
+        def dump_to: (IO) -> void
+
+        def self.load: (Pathname file_path, lockfile_source) -> Lockfile
+      end
+    end
+  end
+end

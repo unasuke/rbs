@@ -52,7 +52,7 @@ gem "rainbow"
       gemfile_lock_path = tmpdir / 'Gemfile.lock'
       gemfile_lock_path.write GEMFILE_LOCK
 
-      config, lockfile = RBS::Collection::Config.generate_lockfile(config_path: config_path, gemfile_lock_path: gemfile_lock_path)
+      _, lockfile = RBS::Collection::Config.generate_lockfile(config_path: config_path, gemfile_lock_path: gemfile_lock_path)
       io = StringIO.new
       lockfile.dump_to(io)
 
@@ -105,7 +105,7 @@ gem "rainbow"
           gemfile_lock_path = tmpdir / 'Gemfile.lock'
         gemfile_lock_path.write GEMFILE_LOCK
 
-        config, lockfile = Dir.chdir(tmpdir) do
+        _, lockfile = Dir.chdir(tmpdir) do
           RBS::Collection::Config.generate_lockfile(config_path: config_path, gemfile_lock_path: gemfile_lock_path)
         end
         io = StringIO.new
@@ -176,7 +176,7 @@ gem "rainbow"
       YAML
       tmpdir.join('rbs_collection.lock.yaml').write lockfile_yaml
 
-      config, lockfile = RBS::Collection::Config.generate_lockfile(config_path: config_path, gemfile_lock_path: gemfile_lock_path)
+      _, lockfile = RBS::Collection::Config.generate_lockfile(config_path: config_path, gemfile_lock_path: gemfile_lock_path)
       io = StringIO.new()
       lockfile.dump_to(io)
 
@@ -199,7 +199,7 @@ gem "rainbow"
       gemfile_lock_path = tmpdir / 'Gemfile.lock'
       gemfile_lock_path.write GEMFILE_LOCK
 
-      config, lockfile = RBS::Collection::Config.generate_lockfile(config_path: config_path, gemfile_lock_path: gemfile_lock_path)
+      _, lockfile = RBS::Collection::Config.generate_lockfile(config_path: config_path, gemfile_lock_path: gemfile_lock_path)
 
       assert_config <<~YAML, YAML.dump(lockfile.dump)
         sources:
@@ -248,7 +248,7 @@ source "https://rubygems.org/"
            2.2.0
       GEMFILE_LOCK
 
-      config, lockfile = RBS::Collection::Config.generate_lockfile(config_path: config_path, gemfile_lock_path: gemfile_lock_path)
+      _, lockfile = RBS::Collection::Config.generate_lockfile(config_path: config_path, gemfile_lock_path: gemfile_lock_path)
       io = StringIO.new
       lockfile.dump_to(io)
 
@@ -320,7 +320,7 @@ gem "activesupport"
            2.2.0
       GEMFILE_LOCK
 
-      config, lockfile = RBS::Collection::Config.generate_lockfile(config_path: config_path, gemfile_lock_path: gemfile_lock_path)
+      _, lockfile = RBS::Collection::Config.generate_lockfile(config_path: config_path, gemfile_lock_path: gemfile_lock_path)
       io = StringIO.new
       lockfile.dump_to(io)
 
@@ -379,6 +379,8 @@ gem "activesupport"
       gemfile_path = tmpdir / 'Gemfile'
       gemfile_path.write <<~GEMFILE
 source "https://rubygems.org/"
+
+gem 'csv'
       GEMFILE
       gemfile_lock_path = tmpdir / 'Gemfile.lock'
       gemfile_lock_path.write <<~GEMFILE_LOCK
@@ -397,7 +399,7 @@ source "https://rubygems.org/"
            2.2.0
       GEMFILE_LOCK
 
-      config, lockfile = RBS::Collection::Config.generate_lockfile(config_path: config_path, gemfile_lock_path: gemfile_lock_path)
+      _, lockfile = RBS::Collection::Config.generate_lockfile(config_path: config_path, gemfile_lock_path: gemfile_lock_path)
       io = StringIO.new
       lockfile.dump_to(io)
 
@@ -450,7 +452,7 @@ gem "rbs-amber"
            2.2.0
       GEMFILE_LOCK
 
-      config, lockfile = RBS::Collection::Config.generate_lockfile(config_path: config_path, gemfile_lock_path: gemfile_lock_path)
+      _, lockfile = RBS::Collection::Config.generate_lockfile(config_path: config_path, gemfile_lock_path: gemfile_lock_path)
       io = StringIO.new
       lockfile.dump_to(io)
 
@@ -497,7 +499,7 @@ source "https://rubygems.org/"
            2.2.0
       GEMFILE_LOCK
 
-      config, lockfile = RBS::Collection::Config.generate_lockfile(config_path: config_path, gemfile_lock_path: gemfile_lock_path)
+      _, lockfile = RBS::Collection::Config.generate_lockfile(config_path: config_path, gemfile_lock_path: gemfile_lock_path)
       io = StringIO.new
       lockfile.dump_to(io)
 
